@@ -15,6 +15,7 @@ This repository hosts the code and data for our paper: N. Gkalelis, D. Daskalaki
 The dataset root directory must contain the following subdirectories:
  * ```vit_global/```: Numpy arrays of size 30x768 (or 120x768) containing the global frame feature vectors for each video (the 30 (120) frames, times the 768-element vector for each frame).
   * ```vit_local/```: Numpy arrays of size 30x50x768 (or 120x50x768) containing the appearance feature vectors of the detected frame objects for each video (the 30 (120) frames, times the 50 most-prominent objects identified by the object detector, times a 768-element vector for each object bounding box).
+
 For more informations extracting or obtaining these features please see <a href="https://github.com/bmezaris/ViGAT" target="_blank">ViGAT: Bottom-up event recognition and explanation in video using factorized graph attention network</a>.
 
 ### Training
