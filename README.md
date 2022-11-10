@@ -18,10 +18,12 @@ The dataset root directory must contain the following subdirectories:
 
 For more informations extracting or obtaining these features please see <a href="https://github.com/bmezaris/ViGAT" target="_blank">ViGAT: Bottom-up event recognition and explanation in video using factorized graph attention network</a>.
 
+Furthermore, in order to train Gated-ViGAT on any video-dataset, the corresponding ViGAT model should be present. 
+The models for ActivityNet [1] and miniKinetics [2] are available inside ```weights/``` folder.
+
 ### Training
 
-Ιn order to train Gated-ViGAT on any video-dataset, the corresponding ViGAT model should be present. 
-The models for ActivityNet [1] and miniKinetics [2] are available inside ```weights/``` folder. To train a new gate , run 
+To train a new gate , run 
 ```
 python train_gate.py weights/<vigat model>.pt --dataset_root <dataset dir> --dataset [<actnet|minikinetics>]
 ```
