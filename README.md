@@ -53,8 +53,8 @@ N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event 
 BibTex:
 ```
 @inproceedings{GatedViGAT_ISM2022,
-author = {"N. Gkalelis and D. Daskalakis and V. Mezaris",
-title = {Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism},
+author = {N. Gkalelis and D. Daskalakis and V. Mezaris},
+title = {{Gated-ViGAT}: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism},
 year  = {2022},
 month = dec,
 booktitle = {IEEE International Symposium on Multimedia (ISM)}
