@@ -56,7 +56,7 @@ BibTex:
 author = {"N. Gkalelis and D. Daskalakis and V. Mezaris",
 title = {Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism},
 year  = {2022},
-month = ,
+month = dec,
 booktitle = {IEEE International Symposium on Multimedia (ISM)}
 }
 ```
