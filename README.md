@@ -1,6 +1,6 @@
 # Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism
 
-This repository hosts the code and data for our paper: N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism", IEEE International Symposium on Multimedia (ISM), 2022
+This repository hosts the code and data for our paper: N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism", IEEE International Symposium on Multimedia (ISM), 2022.
 
 ## Gated-ViGAT traning and evaluation procedures
 
@@ -16,14 +16,14 @@ The dataset root directory must contain the following subdirectories:
  * ```vit_global/```: Numpy arrays of size 30x768 (or 120x768) containing the global frame feature vectors for each video (the 30 (120) frames, times the 768-element vector for each frame).
   * ```vit_local/```: Numpy arrays of size 30x50x768 (or 120x50x768) containing the appearance feature vectors of the detected frame objects for each video (the 30 (120) frames, times the 50 most-prominent objects identified by the object detector, times a 768-element vector for each object bounding box).
 
-For more informations extracting or obtaining these features please see <a href="https://github.com/bmezaris/ViGAT" target="_blank">ViGAT: Bottom-up event recognition and explanation in video using factorized graph attention network</a>.
+For more informations extracting or obtaining these features please see the GitHub repository referring to our previous work: <a href="https://github.com/bmezaris/ViGAT" target="_blank">ViGAT: Bottom-up event recognition and explanation in video using factorized graph attention network</a>.
 
 Furthermore, in order to train Gated-ViGAT on any video-dataset, the corresponding ViGAT model should be present. 
 The models for ActivityNet [1] and miniKinetics [2] are available inside ```weights/``` folder.
 
 ### Training
 
-To train a new gate , run 
+To train a new gate, run 
 ```
 python train_gate.py weights/<vigat model>.pt --dataset_root <dataset dir> --dataset [<actnet|minikinetics>]
 ```
@@ -48,7 +48,7 @@ Redistributions of source code must retain the above copyright notice, this list
 
 If you find Gated-ViGAT code useful in your work, please cite the following publication where this approach was proposed:
 
-N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism", IEEE ISM, 2022
+N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism", IEEE ISM, 2022.
 
 BibTex:
 ```
@@ -57,7 +57,7 @@ author = {"N. Gkalelis and D.Daskalakis and V. Mezaris",
 title = {Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism},
 year  = {2022},
 month = ,
-booktitle = {ISM}
+booktitle = {IEEE International Symposium on Multimedia (ISM)}
 }
 ```
 
