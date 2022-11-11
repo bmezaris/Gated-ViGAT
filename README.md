@@ -1,18 +1,18 @@
 # Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism
 
-This repository hosts the code and data for our paper: N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism", IEEE International Symposium on Multimedia (ISM), 2022.
+This repository hosts the code and data for our paper: N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism", IEEE International Symposium on Multimedia (ISM), Naples, Italy, Dec. 2022.
 
 ## Introduction
-In this repository, we extend our previously proposed method, ViGAT [1], using a new frame selection policy and a gating mechanism.
-Thus, in contrast to ViGAT, the proposed approach extracts bottom-up information from only a small fraction of the sampled frames, as shown in the figure below. Gated-ViGAT classifies both videos, belonging to the events Rafting (top row) and Snowboarding (bottom row), correctly using only three frames (i.e. the ones shown within a green rectangle), derived using our new frame selection policy.
+In this repository we provide the materials for Gated-ViGAT: an extension of our previously proposed method ViGAT [1] with a new frame selection policy and a gating mechanism.
+In contrast to ViGAT, the proposed Gated-ViGAT extracts bottom-up information from only a small fraction of the sampled frames, as shown in the figure below. In this example, Gated-ViGAT classifies both videos, belonging to the events Rafting (top row) and Snowboarding (bottom row), correctly using only three frames (i.e. the ones shown within a green rectangle), derived using our new frame selection policy.
 
   ![methodIllustration](https://user-images.githubusercontent.com/33573818/201292360-e78a6667-63f5-48f8-8678-b3ffc7df9247.jpg)
 
 The proposed frame selection policy utilizes an explanation and a dissimilarity measure to select the frames that better represent the event depicted in the video as well as provide a diverse overview of it.
 
-Additionally, we replace the CNN-based gating mechanism of [2] with one that combines both convolution and attention in order to be able to process sequences of frames (not only individual frames as in [2]) and thus capture more effectively both the short- and long-term dependencies of the event occurring in the video.
+Additionally, in Gated-ViGAT we introduce a gating mechanism that combines both convolution and attention in order to be able to process sequences of frames (contrarily to the CNN-based gating mechanism of [2], which only processes individual frames) and thus capture more effectively both the short- and long-term dependencies of the event occurring in the video.
 Consequently, the proposed method continues to achieve a high recognition performance, as ViGAT, but with a significant computational complexity reduction.
-Lastly, contrarily to efficient top-down approaches, it can provide explanations about the classification outcome.
+Lastly, contrarily to efficient top-down approaches, Gated-ViGAT can provide explanations about the classification outcome.
 
 ## Gated-ViGAT traning and evaluation procedures
 
@@ -61,7 +61,7 @@ Redistributions of source code must retain the above copyright notice, this list
 
 If you find Gated-ViGAT code useful in your work, please cite the following publication where this approach was proposed:
 
-N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism", IEEE ISM, 2022.
+N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism", IEEE International Symposium on Multimedia (ISM), Naples, Italy, Dec. 2022.
 
 BibTex:
 ```
@@ -69,7 +69,7 @@ BibTex:
 author = {N. Gkalelis and D. Daskalakis and V. Mezaris},
 title = {{Gated-ViGAT}: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism},
 year  = {2022},
-month = dec,
+month = {Dec.},
 booktitle = {IEEE International Symposium on Multimedia (ISM)}
 }
 ```
