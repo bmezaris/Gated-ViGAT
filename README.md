@@ -66,16 +66,32 @@ N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event 
 BibTex:
 ```
 @inproceedings{GatedViGAT_ISM2022,
-author = {N. Gkalelis and D. Daskalakis and V. Mezaris},
-title = {{Gated-ViGAT}: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism},
-year  = {2022},
-month = {Dec.},
-booktitle = {IEEE International Symposium on Multimedia (ISM)}
+author={Gkalelis, Nikolaos and Daskalakis, Dimitrios and Mezaris, Vasileios},
+title={{Gated-ViGAT}: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism},
+year={2022},
+month={Dec.},
+booktitle={IEEE International Symposium on Multimedia (ISM)}
 }
 ```
 
-You may want to also consult and, if you find it also useful, also cite our earlier work on this topic (ViGAT):
+You may want to also consult and, if you find it useful, also cite our earlier work on this topic (ViGAT):
 
+N. Gkalelis, D. Daskalakis, V. Mezaris, "ViGAT: Bottom-up event recognition and explanation in video using factorized graph attention network", IEEE Access, vol. 10, pp. 108797-108816, 2022. DOI: 10.1109/ACCESS.2022.3213652. https://doi.org/10.1109/ACCESS.2022.3213652
+
+Bibtex:
+```
+@ARTICLE{ViGAT_Access22,
+  author={Gkalelis, Nikolaos and Daskalakis, Dimitrios and Mezaris, Vasileios},
+  journal={IEEE Access}, 
+  title={ViGAT: Bottom-Up Event Recognition and Explanation in Video Using Factorized Graph Attention Network}, 
+  year={2022},
+  volume={10},
+  number={},
+  pages={108797-108816},
+  doi={10.1109/ACCESS.2022.3213652},
+  url={https://doi.org/10.1109/ACCESS.2022.3213652}    
+}
+```
 
 
 ## Acknowledgements
