@@ -74,6 +74,10 @@ booktitle = {IEEE International Symposium on Multimedia (ISM)}
 }
 ```
 
+You may want to also consult and, if you find it also useful, also cite our earlier work on this topic (ViGAT):
+
+
+
 ## Acknowledgements
 
 This work was supported by the EU Horizon 2020 programme under grant agreement 101021866 (CRiTERIA).
