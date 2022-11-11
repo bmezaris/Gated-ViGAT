@@ -35,7 +35,7 @@ The models for ActivityNet [2] and miniKinetics [3] are available inside ```weig
 
 ### Training
 
-To train a new gate, run 
+To train a new gate, utilizing our frame selection policy, run 
 ```
 python train_gate.py weights/<vigat model>.pt --dataset_root <dataset dir> --dataset [<actnet|minikinetics>]
 ```
