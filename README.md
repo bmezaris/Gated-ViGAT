@@ -80,10 +80,10 @@ This work was supported by the EU Horizon 2020 programme under grant agreement 1
 
 ## References
 
-[1] N. Gkalelis, D. Daskalakis, V. Mezaris, "ViGAT: Bottom-up event recognition and explanation in video using factorized graph attention network", IEEE Access, 2022. <a href="https://doi.org/10.1109/ACCESS.2022.3213652" target="_blank"> DOI: 10.1109/ACCESS.2022.3213652.</a>.
+[1] N. Gkalelis, D. Daskalakis, V. Mezaris, "ViGAT: Bottom-up event recognition and explanation in video using factorized graph attention network", IEEE Access, 2022. <a href="https://doi.org/10.1109/ACCESS.2022.3213652" target="_blank"> DOI: 10.1109/ACCESS.2022.3213652</a>.
 
-[2] A. Ghodrati, B. Ehteshami Bejnordi and A. Habibian. FrameExit: Conditional Early Exiting for Efficient Video Recognition. In Proc. IEEE CVPR, 2021, pp. 15603-15613
+[2] A. Ghodrati, B. Ehteshami Bejnordi and A. Habibian. FrameExit: Conditional Early Exiting for Efficient Video Recognition. In Proc. IEEE CVPR, 2021, pp. 15603-15613.
 
 [3] B. G. Fabian Caba Heilbron, Victor Escorcia and J. C. Niebles. ActivityNet: A large-scale video benchmark for human activity understanding. In Proc. IEEE CVPR, 2015, pp. 961–970.
 
-[4]  Saining Xie, Chen Sun, Jonathan Huang, Zhuowen Tu and Kevin Murphy. Rethinking Spatiotemporal Feature Learning: Speed-Accuracy Trade-offs in Video Classification. In Proc. ECCV, 2018, pp. 305-321
+[4]  Saining Xie, Chen Sun, Jonathan Huang, Zhuowen Tu and Kevin Murphy. Rethinking Spatiotemporal Feature Learning: Speed-Accuracy Trade-offs in Video Classification. In Proc. ECCV, 2018, pp. 305-321.
