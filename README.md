@@ -11,7 +11,7 @@ In contrast to ViGAT, the proposed Gated-ViGAT extracts bottom-up information fr
 The proposed frame selection policy utilizes an explanation and a dissimilarity measure to select the frames that better represent the event depicted in the video as well as provide a diverse overview of it.
 
 Additionally, in Gated-ViGAT we introduce a gating mechanism that combines both convolution and attention in order to be able to process sequences of frames (contrarily to the CNN-based gating mechanism of [2], which only processes individual frames) and thus capture more effectively both the short- and long-term dependencies of the event occurring in the video.
-Consequently, the proposed method continues to achieve a high recognition performance, as ViGAT, but with a significant computational complexity reduction.
+Consequently, the proposed method continues to achieve high recognition performance, as ViGAT, but with a significant computational complexity reduction.
 Lastly, contrarily to efficient top-down approaches, Gated-ViGAT can provide explanations about the classification outcome.
 
 ## Gated-ViGAT traning and evaluation procedures
