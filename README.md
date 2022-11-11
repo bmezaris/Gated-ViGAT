@@ -2,7 +2,7 @@
 
 This repository hosts the code and data for our paper: N. Gkalelis, D. Daskalakis, V. Mezaris, "Gated-ViGAT: Efficient bottom-up event recognition and explanation using a new frame selection policy and gating mechanism", IEEE International Symposium on Multimedia (ISM), 2022.
 
-##Introduction
+## Introduction
 In this repository, we extend our previously proposed method, ViGAT [1], using a new frame selection policy and a gating mechanism.
 Thus, in contrast to ViGAT, the proposed approach extracts bottom-up information from only a small fraction of the sampled frames.
 The proposed frame selection policy utilizes an explanation and a dissimilarity measure to select the frames that better represent the event depicted in the video as well as provide a diverse overview of it.
