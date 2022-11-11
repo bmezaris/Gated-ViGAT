@@ -4,7 +4,7 @@ This repository hosts the code and data for our paper: N. Gkalelis, D. Daskalaki
 
 ## Introduction
 In this repository, we extend our previously proposed method, ViGAT [1], using a new frame selection policy and a gating mechanism.
-Thus, in contrast to ViGAT, the proposed approach extracts bottom-up information from only a small fraction of the sampled frames, as shown in the figure below.(It classifies correctly both videos using only three frames (i.e. the ones shown within a green rectangle), derived using our new frame selection policy.)
+Thus, in contrast to ViGAT, the proposed approach extracts bottom-up information from only a small fraction of the sampled frames, as shown in the figure below. Gated-ViGAT classifies both videos, belonging to the events Rafting (top row) and Snowboarding (bottom row), correctly using only three frames (i.e. the ones shown within a green rectangle), derived using our new frame selection policy.
 
   ![methodIllustration](https://user-images.githubusercontent.com/33573818/201292360-e78a6667-63f5-48f8-8678-b3ffc7df9247.jpg)
 
