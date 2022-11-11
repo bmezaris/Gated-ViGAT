@@ -4,11 +4,15 @@ This repository hosts the code and data for our paper: N. Gkalelis, D. Daskalaki
 
 ## Introduction
 In this repository, we extend our previously proposed method, ViGAT [1], using a new frame selection policy and a gating mechanism.
-Thus, in contrast to ViGAT, the proposed approach extracts bottom-up information from only a small fraction of the sampled frames.
+Thus, in contrast to ViGAT, the proposed approach extracts bottom-up information from only a small fraction of the sampled frames, as shown in the figure below.
+
+![methodIllustration](https://user-images.githubusercontent.com/33573818/201292360-e78a6667-63f5-48f8-8678-b3ffc7df9247.jpg)
+
 The proposed frame selection policy utilizes an explanation and a dissimilarity measure to select the frames that better represent the event depicted in the video as well as provide a diverse overview of it.
+
 Additionally, we replace the CNN-based gating mechanism of [2] with one that combines both convolution and attention in order to be able to process sequences of frames (not only individual frames as in [2]) and thus capture more effectively both the short- and long-term dependencies of the event occurring in the video.
 Consequently, the proposed method continues to achieve a high recognition performance, as ViGAT, but with a significant computational complexity reduction.
-Moreover, contrarily to efficient top-down approaches, it can provide explanations about the classification outcome.
+Lastly, contrarily to efficient top-down approaches, it can provide explanations about the classification outcome.
 
 ## Gated-ViGAT traning and evaluation procedures
 
@@ -45,6 +49,7 @@ To evaluate a gate, run
 python evaluation_gate.py weights/<vigat model>.pt weights/<model name>.pt --dataset_root <dataset dir> --dataset [<actnet|minikinetics>]
 ```
 Τhe evaluation parameters can be modified by specifying the appropriate command line arguments. For more information, run ```python evaluation_gate.py --help```.
+
 
 
 ## License
