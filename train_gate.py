@@ -5,6 +5,8 @@ import sys
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import torch.nn.functional as F
+from sklearn.preprocessing import MinMaxScaler
 from torch.utils.data import DataLoader
 import numpy as np
 from datasets import miniKINETICS, ACTNET
@@ -16,7 +18,7 @@ from model import ExitingGatesGATCNN as Model_Gate
 parser = argparse.ArgumentParser(description='GCN Video Classification')
 parser.add_argument('vigat_model', nargs=1, help='Frame trained model')
 parser.add_argument('--gcn_layers', type=int, default=2, help='number of gcn layers')
-parser.add_argument('--dataset', default='actnet', choices=[ 'minikinetics', 'actnet'])
+parser.add_argument('--dataset', default='actnet', choices=['minikinetics', 'actnet'])
 parser.add_argument('--dataset_root', default='/ActivityNet', help='dataset root directory')
 parser.add_argument('--lr', type=float, default=1e-4, help='initial learning rate')
 parser.add_argument('--milestones', nargs="+", type=int, default=[16, 35], help='milestones of learning decay')
@@ -28,14 +30,16 @@ parser.add_argument('--ext_method', default='VIT', choices=['VIT'], help='Extrac
 parser.add_argument('--resume', default=None, help='checkpoint to resume training')
 parser.add_argument('--save_interval', type=int, default=10, help='interval for saving models (epochs)')
 parser.add_argument('--save_folder', default='weights', help='directory to save checkpoints')
-parser.add_argument('--cls_number', type=int, default=7, help='number of classifiers ')
-parser.add_argument('--t_step', nargs="+", type=int, default=[1, 3, 6, 9, 15, 22, 30], help='Classifier frames')
-parser.add_argument('--beta', type=float, default=1e-9, help='Multiplier of gating loss schedule')
+parser.add_argument('--cls_number', type=int, default=5, help='number of classifiers ')
+parser.add_argument('--t_step', nargs="+", type=int, default=[3, 5, 7, 9, 13], help='Classifier frames')
+parser.add_argument('--t_array', nargs="+", type=int, default=[1, 2, 3, 4, 5], help='e_t calculation')
+parser.add_argument('--beta', type=float, default=1e-6, help='Multiplier of gating loss schedule')
 parser.add_argument('-v', '--verbose', action='store_true', help='show details')
 args = parser.parse_args()
 
 
-def train_frame(model_cls, model_gate, model_vigat_local, model_vigat_global, dataset, loader, crit, crit_gate, opt, sched, device):
+def train_frame(model_cls, model_gate, model_vigat_local, model_vigat_global, dataset, loader, crit, crit_gate,
+                opt, sched, device):
     epoch_loss = 0
     for i, batch in enumerate(loader):
         feats, feat_global, label, _ = batch
@@ -46,24 +50,48 @@ def train_frame(model_cls, model_gate, model_vigat_local, model_vigat_global, da
 
         feat_global_single, wids_frame_global = model_vigat_global(feat_global, get_adj=True)
 
+        # Cosine Similarity
+        normalized_global_feats = F.normalize(feat_global, dim=2)
+        squared_euclidian_dist = torch.square(torch.cdist(normalized_global_feats, normalized_global_feats))
+        cosine_disimilarity = (squared_euclidian_dist / 4.0)
+        index_bestframes = np.argsort(wids_frame_global, axis=1)[:, -1:]
+        scaler = MinMaxScaler(feature_range=(0, 1))
+        scaler.fit(wids_frame_global.T)
+        new_wids = scaler.transform(wids_frame_global.T).T
+        for j in range(args.t_step[-1]):
+            index_bestwid = np.argsort(new_wids, axis=1)[:, -1:]
+            if j != 0:
+                index_bestframes = np.append(index_bestframes, index_bestwid, axis=1)
+            index_bestwid = torch.tensor(index_bestwid).to(device)
+            specific_cosine = cosine_disimilarity[
+                torch.arange(cosine_disimilarity.shape[0]).unsqueeze(-1), index_bestwid].squeeze(1)
+            new_wids = (torch.tensor(new_wids).to(device) * specific_cosine).cpu().numpy()
+            scaler.fit(new_wids.T)
+            new_wids = scaler.transform(new_wids.T).T
+        index_bestframes = torch.tensor(index_bestframes)
+
         opt.zero_grad()
         feat_gate = feat_global_single
         feat_gate = feat_gate.unsqueeze(dim=1)
         loss_gate = 0.
 
         for t in range(args.cls_number):
-            index_bestframes = torch.tensor(np.sort(np.argsort(wids_frame_global, axis=1)[:, -args.t_step[t]:])).to(device)
-            feats_bestframes = feats.gather(dim=1, index=index_bestframes.unsqueeze(-1).unsqueeze(-1).expand(-1, -1, dataset.NUM_BOXES, dataset.NUM_FEATS)).to(device)
+            indexes = index_bestframes[:, :args.t_step[t]].to(device)
+            feats_bestframes = feats.gather(dim=1, index=indexes.unsqueeze(-1).unsqueeze(-1)
+                                            .expand(-1, -1, dataset.NUM_BOXES, dataset.NUM_FEATS)).to(device)
             feat_local_single = model_vigat_local(feats_bestframes)
             feat_single_cls = torch.cat([feat_local_single, feat_global_single], dim=-1)
             feat_gate = torch.cat((feat_gate, feat_local_single.unsqueeze(dim=1)), dim=1)
             out_data = model_cls(feat_single_cls)
-
-            loss_t = crit(out_data, label).mean(dim=-1)
-            e_t = args.beta * torch.exp(torch.tensor(t)/2.)
-            labels_gate = loss_t < e_t
+            if args.dataset != 'actnet':
+                loss_t = crit(out_data, label)
+            else:
+                loss_t = crit(out_data, label).mean(dim=-1)
+            e_t = args.beta * torch.exp(torch.tensor(args.t_array[t])/2.)
+            labels_gate = loss_t < e_t #torch.exp
             out_data_gate = model_gate(feat_gate.to(device), t)
             loss_gate += crit_gate(out_data_gate, torch.Tensor.float(labels_gate).unsqueeze(dim=1))
+
         loss_gate = loss_gate/args.cls_number
         loss_gate.backward()
         opt.step()
@@ -118,11 +146,12 @@ def main():
     model_gate.train()
     for epoch in range(start_epoch, args.num_epochs):
         t0 = time.perf_counter()
-        loss = train_frame(model_cls, model_gate, model_vigat_local, model_vigat_global, dataset, loader, crit, crit_gate, opt, sched, device)
+        loss = train_frame(model_cls, model_gate, model_vigat_local, model_vigat_global, dataset, loader, crit,
+                           crit_gate, opt, sched, device)
         t1 = time.perf_counter()
 
         if (epoch + 1) % args.save_interval == 0:
-            sfnametmpl = 'model_gate_-{}-{:03d}.pt'
+            sfnametmpl = 'model_gate_disimilarity-{}-{:03d}.pt'
             sfname = sfnametmpl.format(args.dataset, epoch + 1)
             spth = os.path.join(args.save_folder, sfname)
             torch.save({
